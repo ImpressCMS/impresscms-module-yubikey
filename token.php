@@ -22,13 +22,18 @@ include_once ICMS_ROOT_PATH . '/header.php';
 $clean_op = '';
 $yubikey_token_handler = icms_getModuleHandler('token', basename(dirname(__FILE__)), 'yubikey');
 
-if (isset($_POST['op'])) $clean_op = htmlentities(trim($_POST['op']));
-if (isset($_GET['op'])) $clean_op = htmlentities(trim($_GET['op']));
+// Sanitise the op parameter
+if (isset($_POST['op'])) $dirty_op = htmlentities(trim($_POST['op']));
+if (isset($_GET['op'])) $dirty_op = htmlentities(trim($_GET['op']));
 
 $valid_op = array('login', '');
 
-if (in_array($clean_op, $valid_op, true))
+// Check that op is a permitted (whitelisted) value
+if (in_array($dirty_op, $valid_op, true))
 {
+	// We accept that op is now clean and safe to use
+	$clean_op = $dirty_op;
+	
 	switch($clean_op)
 	{
 		case "login":
@@ -103,7 +108,7 @@ if (in_array($clean_op, $valid_op, true))
 						}
 					}
 				}				
-			} elseif ($_POST['pass'] && !clean_otp) {
+			} elseif ($_POST['pass'] && !$clean_otp) {
 				// If there's no OTP try the standard login (login may have been posted from the 
 				// Yubikey login block)
 				include ICMS_ROOT_PATH . '/include/checklogin.php';

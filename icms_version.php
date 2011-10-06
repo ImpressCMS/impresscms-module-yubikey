@@ -17,7 +17,7 @@ if (!defined("ICMS_ROOT_PATH")) die("ICMS root path not defined");
 /**  General Information  */
 $modversion = array(
   'name'=> _MI_YUBIKEY_MD_NAME,
-  'version'=> 1.0,
+  'version'=> 1.01,
   'description'=> _MI_YUBIKEY_MD_DESC,
   'author'=> "Madfish (Simon Wilkinson)",
   'credits'=> "Tom Corwine developed the Yubikey PHP API calls used in this module.",
@@ -32,10 +32,10 @@ $modversion = array(
   'image'=> "images/icon_big.png", /* for backward compatibility */
 
 /**  Development information */
-  'status_version'=> "1.0",
+  'status_version'=> "1.01",
   'status'=> "Final",
-  'date'=> "9/9/2011",
-  'author_word'=> "Use it wisely.",
+  'date'=> "6/10/2011",
+  'author_word'=> "This module is not a substitute for sensible password management.",
 
 /** Contributors */
   'developer_website_url' => "https://www.isengard.biz",

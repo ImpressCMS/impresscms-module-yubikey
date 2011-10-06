@@ -18,6 +18,7 @@ Requirements
 ============
 1. You need a Yubikey hardware token, they cost $25. You can buy these from Yubico http://yubico.com/. Do not buy them from a reseller. Sometimes you can find promotional codes online.
 2. Your server must have cURL installed.
+3. You must get a Client ID and API key from the Yubikey website (see below). The module will not work until you do (see set up, below).
 
 Set up
 ======

@@ -87,10 +87,10 @@ function yubikey_login_edit($options) {
 
 	// Set block display configuration - this controls which login fields will be displayed	
 	$display_mode_array = array(
-		0 => _MB_YUBIKEY_LOGIN_OPTION_1, // Display username, password fields, no Yubikey links
-		1 => _MB_YUBIKEY_LOGIN_OPTION_2, // (Default) Display username, password fields + link to Yubikey login page
-		2 => _MB_YUBIKEY_LOGIN_OPTION_3, // Display username, password and Yubikey (optional) fields
-		3 => _MB_YUBIKEY_LOGIN_OPTION_4  // Display password and Yubikey (required) fields
+		0 => _MB_YUBIKEY_LOGIN_OPTION_0, // Display username, password fields, no Yubikey links
+		1 => _MB_YUBIKEY_LOGIN_OPTION_1, // (Default) Display username, password fields + link to Yubikey login page
+		2 => _MB_YUBIKEY_LOGIN_OPTION_2, // Display username, password and Yubikey (optional) fields
+		3 => _MB_YUBIKEY_LOGIN_OPTION_3  // Display password and Yubikey (required) fields
 		);
 	
 	$form = '<table><tr>';
