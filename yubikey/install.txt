@@ -1,0 +1,25 @@
+/**
+* Install information
+*
+* @copyright	Copyright Madfish (Simon Wilkinson) 2011
+* @license		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License (GPL)
+* @since		1.0
+* @author		Madfish (Simon Wilkinson) <simon@isengard.biz>
+* @package		yubikey
+* @version		$Id$
+*/
+
+How to install Yubikey
+======================
+
+Yubikey is installed as a regular ImpressCMS module, which means you should copy the complete /yubikey folder into the /modules directory of your website. Then, log in to your site as administrator, go to System Admin > Modules, look for the Yubikey icon in the list of uninstalled modules and click in the install icon. Follow the directions in the screen and you'll be ready to go.
+
+Requirements
+============
+1. You need a Yubikey hardware token, they cost $25. You can buy these from Yubico http://yubico.com/. Do not buy them from a reseller. Sometimes you can find promotional codes online.
+2. Your server must have cURL installed.
+3. You must get a Client ID and API key from the Yubikey website (see below). The module will not work until you do (see set up, below).
+
+Set up
+======
+To operate the module you need to obtain a Yubikey client ID and secret API key from https://upgrade.yubico.com/getapikey/. This information must be entered in the module preferences. Only then will you be able to authenticate keys against the Yubico validation server.

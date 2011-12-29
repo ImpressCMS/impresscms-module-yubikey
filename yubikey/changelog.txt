@@ -1,0 +1,11 @@
+Yubikey Version 1.0 Final (9/9/2011)
+====================================
+
+- First public release of the module.
+
+Version 1.01 (6/10/2011)
+------------------------
+- Fix bug that prevented single-factor accounts from logging in via the Yubikey block [option 2].
+- Changed the Yubikey block option language constant numbers to follow the array keys.
+- Clarified requirements in install.txt.
+- Changed the whitelist code in token.php to be more clear/logical.

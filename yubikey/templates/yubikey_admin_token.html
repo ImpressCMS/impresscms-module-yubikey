@@ -1,0 +1,14 @@
+<{if $yubikey_token_title}>
+	<h1><{$yubikey_token_title}></h1>
+<{/if}>
+<{if $yubikey_token_info}>
+	<p><{$yubikey_token_info}></p>
+<{/if}>
+
+<{if $yubikey_token_table}>
+	<{$yubikey_token_table}>
+<{/if}>
+
+<{if $addtoken}>
+	<{includeq file='db:system_common_form.html' form=$addtoken}>
+<{/if}>
