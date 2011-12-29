@@ -9,3 +9,7 @@ Version 1.01 (6/10/2011)
 - Changed the Yubikey block option language constant numbers to follow the array keys.
 - Clarified requirements in install.txt.
 - Changed the whitelist code in token.php to be more clear/logical.
+
+Version 1.1 (29/12/2011)
+------------------------
+- Update module to ImpressCMS 1.3.x specification.
