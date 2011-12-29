@@ -26,8 +26,8 @@ function yubikey_login_show($options) {
 	global $icmsUser, $icmsConfig, $xoTheme;
 	$block = array();
 	
-	include_once(ICMS_ROOT_PATH . '/modules/' . $yubikeyModule->dirname() . '/include/common.php');
-	$xoTheme->addStylesheet(ICMS_URL . '/modules/' . $yubikeyModule->dirname() . '/module.css');
+	include_once(ICMS_ROOT_PATH . '/modules/' . $yubikeyModule->getVar('dirname') . '/include/common.php');
+	$xoTheme->addStylesheet(ICMS_URL . '/modules/' . $yubikeyModule->getVar('dirname') . '/module.css');
 	
 	// Yubikey settings
 	$block['yubikey'] = _MB_YUBIKEY;
@@ -83,7 +83,7 @@ function yubikey_login_show($options) {
 function yubikey_login_edit($options) {
 
 	$yubikeyModule = icms_getModuleInfo('yubikey');
-	include_once(ICMS_ROOT_PATH . '/modules/' . $yubikeyModule->dirname() . '/include/common.php');
+	include_once(ICMS_ROOT_PATH . '/modules/' . $yubikeyModule->getVar('dirname') . '/include/common.php');
 
 	// Set block display configuration - this controls which login fields will be displayed	
 	$display_mode_array = array(

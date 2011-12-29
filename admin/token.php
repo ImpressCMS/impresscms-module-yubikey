@@ -104,14 +104,14 @@ if (in_array($clean_op,$valid_op,true)){
 		}
 
   		include_once ICMS_ROOT_PATH."/kernel/icmspersistabletable.php";
-  		$objectTable = new IcmsPersistableTable($yubikey_token_handler);
+  		$objectTable = new  icms_ipf_view_Table($yubikey_token_handler);
 		$objectTable->addQuickSearch('user_id', _AM_YUBIKEY_QUICK_SEARCH_UID);
-		$objectTable->addColumn(new IcmsPersistableColumn('user_id', _GLOBAL_LEFT, true, false,
+		$objectTable->addColumn(new icms_ipf_view_Column('user_id', _GLOBAL_LEFT, true, false,
 				false, _CO_YUBIKEY_TOKEN_USER_ID));
-		$objectTable->addColumn(new IcmsPersistableColumn('user_id', _GLOBAL_LEFT, true, 'uid',
+		$objectTable->addColumn(new icms_ipf_view_Column('user_id', _GLOBAL_LEFT, true, 'uid',
 				false, _CO_YUBIKEY_TOKEN_UID));
-		$objectTable->addColumn(new IcmsPersistableColumn('public_id', _GLOBAL_LEFT, true));
-		$objectTable->addColumn(new IcmsPersistableColumn('yubikey_enabled', _GLOBAL_LEFT, true));
+		$objectTable->addColumn(new icms_ipf_view_Column('public_id', _GLOBAL_LEFT, true));
+		$objectTable->addColumn(new icms_ipf_view_Column('yubikey_enabled', _GLOBAL_LEFT, true));
   		$objectTable->addIntroButton('addtoken', 'token.php?op=mod', _AM_YUBIKEY_TOKEN_CREATE);
   		$icmsAdminTpl->assign('yubikey_token_table', $objectTable->fetch());
   		$icmsAdminTpl->display('db:yubikey_admin_token.html');

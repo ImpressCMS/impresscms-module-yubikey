@@ -25,31 +25,31 @@ if (isset($yubikeyModule)) {
 	
 	$i++;
 	$headermenu[$i]['title'] = _CO_ICMS_GOTOMODULE;
-	$headermenu[$i]['link'] = ICMS_URL . '/modules/' . $yubikeyModule->dirname();
+	$headermenu[$i]['link'] = ICMS_URL . '/modules/' . $yubikeyModule->getVar('dirname');
 
 	$i++;
 	$headermenu[$i]['title'] = _PREFERENCES;
 	$headermenu[$i]['link'] = '../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod='
-			. $yubikeyModule->mid();
+			. $yubikeyModule->getVar('mid');
 	
 	$i++;
 	$headermenu[$i]['title'] = _MI_YUBIKEY_TEMPLATES;
 	$headermenu[$i]['link'] = '../../system/admin.php?fct=tplsets&op=listtpl&tplset='
-			. $icmsConfig['template_set'] . '&moddir=' . $yubikeyModule->dirname();
+			. $icmsConfig['template_set'] . '&moddir=' . $yubikeyModule->getVar('dirname');
 
 	$i++;
 	$headermenu[$i]['title'] = _CO_ICMS_UPDATE_MODULE;
 	$headermenu[$i]['link'] = ICMS_URL 
 			. '/modules/system/admin.php?fct=modulesadmin&op=update&module='
-			. $yubikeyModule->dirname();
+			. $yubikeyModule->getVar('dirname');
 
 	$i++;
 	$headermenu[$i]['title'] = _MODABOUT_ABOUT;
-	$headermenu[$i]['link'] = ICMS_URL . '/modules/' . $yubikeyModule->dirname()
+	$headermenu[$i]['link'] = ICMS_URL . '/modules/' . $yubikeyModule->getVar('dirname')
 			. '/admin/about.php';
 
 	$i++;
 	$headermenu[$i]['title'] = _MI_YUBIKEY_MANUAL;
-	$headermenu[$i]['link'] = ICMS_URL . '/modules/' . $yubikeyModule->dirname()
+	$headermenu[$i]['link'] = ICMS_URL . '/modules/' . $yubikeyModule->getVar('dirname')
 			. '/extras/yubikey_module_manual.pdf';
 }

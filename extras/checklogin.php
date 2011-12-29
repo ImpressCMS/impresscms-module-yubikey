@@ -86,7 +86,7 @@ if (!$yubikey_login_page && !$icmsConfig['closesite']) { // flag that is set by 
 			$user_id = array_shift(array_keys($user_list));
 
 			// Check if there is an enabled Yubikey associated with this username (login_name)
-			$yubikey_token_handler = icms_getModuleHandler('token', $yubikeyModule->dirname(),
+			$yubikey_token_handler = icms_getModuleHandler('token', $yubikeyModule->getVar('dirname'),
 					'yubikey');
 			$yubikey_criteria = icms_buildCriteria(array('user_id' => $user_id,
 					'yubikey_enabled' => '1'));
@@ -97,7 +97,7 @@ if (!$yubikey_login_page && !$icmsConfig['closesite']) { // flag that is set by 
 				// Redirect Yubikey-enabled accounts to the Yubikey login page
 				unset($yubikey_authentication_required);
 				icms_loadLanguageFile('yubikey', 'common');
-				redirect_header(ICMS_URL . '/modules/' . $yubikeyModule->dirname() . '/token.php', 2,
+				redirect_header(ICMS_URL . '/modules/' . $yubikeyModule->getVar('dirname') . '/token.php', 2,
 						_CO_YUBIKEY_AUTHENTICATION_REQUIRED);
 				exit;
 			}
