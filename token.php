@@ -29,7 +29,7 @@ if (isset($_GET['op'])) $dirty_op = htmlentities(trim($_GET['op']));
 $valid_op = array('login', '');
 
 // Check that op is a permitted (whitelisted) value
-if (in_array($dirty_op, $valid_op, TRUE))
+if (in_array($dirty_op, $valid_op))
 {
 	// We accept that op is a whitelisted value that is safe to use
 	$clean_op = $dirty_op;
@@ -44,9 +44,8 @@ if (in_array($dirty_op, $valid_op, TRUE))
 			$clean_otp = $dirty_otp = $public_id = $criteria = $tokenObj = $user_details = $user_name = '';
 
 			// Sanitise and validate one time password (alphanumeric string 44 characters in length)
-			$myts =& MyTextsanitizer::getInstance();
 			$dirty_otp = isset($_POST['yubikey_otp']) ? strip_tags(trim($_POST['yubikey_otp'])) : '';
-			$dirty_otp = mysql_real_escape_string($myts->stripSlashesGPC($dirty_otp));
+			$dirty_otp = mysql_real_escape_string(icms_core_DataFilter::stripSlashesGPC($dirty_otp));
 			if (ctype_alnum($dirty_otp) && strlen($dirty_otp) == 44)
 			{
 				$clean_otp = $dirty_otp;
@@ -68,7 +67,7 @@ if (in_array($dirty_op, $valid_op, TRUE))
 					$tokenObj = array_shift($tokenObjects);
 					
 					// Check the key is actually enabled
-					if ($tokenObj->getVar('yubikey_enabled') == 1)
+					if ($tokenObj->getVar('yubikey_enabled', 'e') == 1)
 					{
 						// Lookup the associated user
 						$member_handler = icms::handler("icms_member");
