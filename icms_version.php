@@ -34,8 +34,8 @@ $modversion = array(
 /**  Development information */
   'status_version'=> "1.1",
   'status'=> "Beta",
-  'date'=> "29/12/2011",
-  'author_word'=> "This module protects designated accounts in the events their password is compromised. It is not a substitute for sensible password management.",
+  'date'=> "9/2/2012",
+  'author_word'=> "This module is not a substitute for sensible password management. However, it protects designated accounts in the events their password is compromised.",
 
 /** Contributors */
   'developer_website_url' => "https://www.isengard.biz",

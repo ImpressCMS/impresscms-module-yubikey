@@ -70,7 +70,7 @@ if (in_array($dirty_op, $valid_op, true))
 					
 					// validate the ICMS account password against the associated user
 					// need to use the userid to lookup the username
-					$member_handler = &xoops_gethandler('member');
+					$member_handler = icms::handler("icms_member");
 					$user_details = $member_handler->getUser($tokenObj->getVar('user_id', 'e'));
 					
 					if ($user_details)
@@ -125,7 +125,7 @@ if (in_array($dirty_op, $valid_op, true))
 	}
 }
 
-$icmsTpl->assign('yubikey_show_breadcrumb', $yubikeyConfig['show_breadcrumb']);
+$icmsTpl->assign('yubikey_show_breadcrumb', icms::$module->config['show_breadcrumb']);
 $icmsTpl->assign('yubikey_module_home', yubikey_getModuleName(true, true));
 
 include_once 'footer.php';

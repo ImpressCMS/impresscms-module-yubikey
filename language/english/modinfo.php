@@ -13,9 +13,6 @@
 if (!defined("ICMS_ROOT_PATH")) die("ICMS root path not defined");
 
 // Module Info
-// The name of this module
-
-global $icmsModule;
 define("_MI_YUBIKEY_MD_NAME", "Yubikey");
 define("_MI_YUBIKEY_MD_DESC", "Enables 2-factor authentication using Yubikey hardware tokens");
 

@@ -19,9 +19,10 @@
 */
 function edittoken($token_id = 0)
 {
-	global $yubikey_token_handler, $yubikeyModule, $icmsAdminTpl;
+	global $yubikey_token_handler, $icmsAdminTpl;
 
 	$tokenObj = $yubikey_token_handler->get($token_id);
+	$yubikeyModule = icms::handler("icms_module")->getByDirname("yubikey");
 
 	if (!$tokenObj->isNew()){
 		$yubikeyModule->displayAdminMenu(0, _AM_YUBIKEY_TOKENS . " > " . _CO_ICMS_EDITING);
@@ -64,10 +65,8 @@ if (in_array($clean_op,$valid_op,true)){
   		break;
 
   	case "addtoken":
-          include_once ICMS_ROOT_PATH."/kernel/icmspersistablecontroller.php";
-          $controller = new IcmsPersistableController($yubikey_token_handler);
+          $controller = new icms_ipf_Controller($yubikey_token_handler);
    		  $controller->storeFromDefaultForm(_AM_YUBIKEY_TOKEN_CREATED, _AM_YUBIKEY_TOKEN_MODIFIED);
-
   		break;
 
 	case "changeStatus":
@@ -79,14 +78,11 @@ if (in_array($clean_op,$valid_op,true)){
 		} else {
 			redirect_header(ICMS_URL . $ret, 2, _AM_YUBIKEY_TOKEN_ENABLED);
 		}
-		
 		break;
 
   	case "del":
-  	    include_once ICMS_ROOT_PATH."/kernel/icmspersistablecontroller.php";
-          $controller = new IcmsPersistableController($yubikey_token_handler);
-  		$controller->handleObjectDeletion();
-
+        $controller = new icms_ipf_Controller($yubikey_token_handler);
+		$controller->handleObjectDeletion();
   		break;
 
   	default:
@@ -103,7 +99,6 @@ if (in_array($clean_op,$valid_op,true)){
 			}
 		}
 
-  		include_once ICMS_ROOT_PATH."/kernel/icmspersistabletable.php";
   		$objectTable = new  icms_ipf_view_Table($yubikey_token_handler);
 		$objectTable->addQuickSearch('user_id', _AM_YUBIKEY_QUICK_SEARCH_UID);
 		$objectTable->addColumn(new icms_ipf_view_Column('user_id', _GLOBAL_LEFT, true, false,

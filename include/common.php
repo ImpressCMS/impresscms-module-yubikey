@@ -36,7 +36,3 @@ $yubikey_isAdmin = icms_userIsAdmin(YUBIKEY_DIRNAME);
 
 // Creating the module config array to make it available throughout the module
 $yubikeyConfig = icms_getModuleConfig(YUBIKEY_DIRNAME);
-
-// creating the icmsPersistableRegistry to make it available throughout the module
-global $icmsPersistableRegistry;
-$icmsPersistableRegistry = IcmsPersistableRegistry::getInstance();

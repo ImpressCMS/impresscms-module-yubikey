@@ -35,16 +35,9 @@ function yubikey_db_upgrade_2() {
 }*/
 
 function icms_module_update_yubikey($module) {
-	/**
-	 * Using the IcmsDatabaseUpdater to automaticallly manage the database upgrade dynamically
-	 * according to the class defined in the module
-	 */
-	$icmsDatabaseUpdater = XoopsDatabaseFactory::getDatabaseUpdater();
-	$icmsDatabaseUpdater->moduleUpgrade($module);
     return true;
 }
 
 function icms_module_install_yubikey($module) {
-
 	return true;
 }

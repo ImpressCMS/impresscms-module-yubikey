@@ -45,6 +45,12 @@ class YubikeyTokenHandler extends icms_ipf_Handler {
 		return $visibility;
 	}
 
+	/** 
+	 * Check validity of key and user before saving
+	 * 
+	 * @param type $tokenObj
+	 * @return boolean 
+	 */
 	protected function beforeSave(& $tokenObj)
 	{
 		$one_time_password = $yubikey_user = '';
@@ -52,18 +58,18 @@ class YubikeyTokenHandler extends icms_ipf_Handler {
 		$yubikey_token_handler = icms_getModuleHandler('token', basename(dirname(dirname(__FILE__))), 
 				'yubikey');
 		
-		$user_id = $tokenObj->getVar('user_id');
+		$user_id = $tokenObj->uid();
 		$one_time_password = $tokenObj->getVar('public_id');
 		$public_id_length = strlen($tokenObj->getVar('public_id'));
 		
-		// check the length of the public_id field
+		// Check the length of the public_id field
 		switch ($public_id_length)
 		{
-			case "12": // only the public ID of the key was submitted
+			case "12": // Only the public ID of the key was submitted
 				$valid_key = ctype_alnum($one_time_password) ? true : false;
 				break;
 			
-			case "44": // public ID + one time password submitted, validate the key against Yubico
+			case "44": // Public ID + one time password submitted, validate the key against Yubico
 				$valid_key = ctype_alnum($one_time_password) ? true : false;
 				if ($valid_key)
 				{
@@ -72,12 +78,12 @@ class YubikeyTokenHandler extends icms_ipf_Handler {
 				}
 				break;
 			
-			default: // if some other length was entered, it's wrong
+			default: // If some other length was entered, it's wrong
 				$valid_key = false;
 				break;
 		}
 
-		// check for duplicate Yubikeys - each may only be assigned to one account
+		// Check for duplicate Yubikeys - each may only be assigned to one account
 		if ($valid_key)
 		{
 			$criteria = icms_buildCriteria(array('public_id' => $tokenObj->getVar('public_id')));
@@ -93,10 +99,10 @@ class YubikeyTokenHandler extends icms_ipf_Handler {
 			}
 		}
 		
-		// check that the designated user exists
-		$member_handler = &xoops_gethandler('member');
+		// Check that the designated user actually exists
+		$member_handler = icms::handler("icms_member");
 		$yubikey_user = $member_handler->getUser($user_id);
-		if (!empty($yubikey_user))
+		if (empty($yubikey_user))
 		{
 			$valid_key = false;
 		}

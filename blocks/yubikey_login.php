@@ -23,7 +23,7 @@ if (!defined("ICMS_ROOT_PATH")) die("ICMS root path not defined");
 function yubikey_login_show($options) {
 	
 	$yubikeyModule = icms_getModuleInfo('yubikey');
-	global $icmsUser, $icmsConfig, $xoTheme;
+	global $icmsConfig, $xoTheme;
 	$block = array();
 	
 	include_once(ICMS_ROOT_PATH . '/modules/' . $yubikeyModule->getVar('dirname') . '/include/common.php');
@@ -35,7 +35,7 @@ function yubikey_login_show($options) {
 	$block['yubikey_login_display_mode'] = $options[0];
 	
 	// The rest is standard system login block	
-	if (!$icmsUser) {
+	if (!icms::$user) {
 		$block['lang_username'] = _USERNAME;
 		$block['unamevalue'] = "";
 		if (isset($_COOKIE[$icmsConfig['usercookie']])) {
@@ -53,8 +53,8 @@ function yubikey_login_show($options) {
 			$block['sslloginlink'] = "<a href=\"javascript:openWithSelfMain('".$icmsConfig['sslloginlink']."', 'ssllogin', 300, 200);\">"._MB_SYSTEM_SECURE."</a>";
 		}
 
-		$config_handler =& xoops_gethandler('config');
-		$icmsConfigUser =& $config_handler->getConfigsByCat(XOOPS_CONF_USER);
+		$config_handler = icms::handler('config');
+		$icmsConfigUser = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
 
 		if ($icmsConfigUser['allow_register'] == 1) {
 			$block['registration'] = $icmsConfigUser['allow_register'];
@@ -64,7 +64,7 @@ function yubikey_login_show($options) {
 			$block['rememberme'] = $icmsConfigUser['remember_me'];
 		}
 
-		$xoopsAuthConfig =& $config_handler->getConfigsByCat(XOOPS_CONF_AUTH);
+		$xoopsAuthConfig = $config_handler->getConfigsByCat(XOOPS_CONF_AUTH);
 		if ($xoopsAuthConfig['auth_openid']) {
 			$block['auth_openid'] = true;
 		}

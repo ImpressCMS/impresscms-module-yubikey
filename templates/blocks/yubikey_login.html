@@ -1,8 +1,8 @@
 <div id="block_login_form">
 	<{if $block.yubikey_login_display_mode == 0 || $block.yubikey_login_display_mode == 1}>
-		<form style="margin-top: 0px;" action="<{$xoops_url}>/user.php" method="post">
+		<form style="margin-top: 0px;" action="<{$icms_url}>/user.php" method="post">
 	<{elseif $block.yubikey_login_display_mode == 2 || $block.yubikey_login_display_mode == 3}>
-		<form style="margin-top: 0px;" action="<{$xoops_url}>/modules/yubikey/token.php?op=login" method="post">
+		<form style="margin-top: 0px;" action="<{$icms_url}>/modules/yubikey/token.php?op=login" method="post">
 	<{/if}>
 	
 	<{if $block.yubikey_login_display_mode == 0 || $block.yubikey_login_display_mode == 1 || $block.yubikey_login_display_mode == 2}>
@@ -30,7 +30,7 @@
 
 <{if $block.auth_openid}>
 	<div id="openid-verify-form2" style="display: none;">
-	  <form method="get" action="<{$xoops_url}>/try_auth.php">
+	  <form method="get" action="<{$icms_url}>/try_auth.php">
 	    <{$smarty.const._MB_SYSTEM_OPENID_URL}>
 	    <input type="hidden" name="action" value="verify" />
 	    <input type="text" class="openid_url" name="openid_identifier" size="12" value="" />
@@ -40,12 +40,12 @@
 	</div>
 <{/if}>
 <br />
-<a href="<{$xoops_url}>/user.php#lost" title="<{$block.lang_lostpass}>"><{$block.lang_lostpass}></a>
+<a href="<{$icms_url}>/user.php#lost" title="<{$block.lang_lostpass}>"><{$block.lang_lostpass}></a>
 <{if $block.registration }>
 <br />
-<a href="<{$xoops_url}>/register.php" title="<{$block.lang_registernow}>"><{$block.lang_registernow}></a>
+<a href="<{$icms_url}>/register.php" title="<{$block.lang_registernow}>"><{$block.lang_registernow}></a>
 <br />
 <{/if}>
 <{if $block.yubikey_login_display_mode == 1}>
-	<br /><a href="<{$xoops_url}>/modules/yubikey/token.php" title="2-factor authentication"><{$block.yubikey_login}></a>
+	<br /><a href="<{$icms_url}>/modules/yubikey/token.php" title="2-factor authentication"><{$block.yubikey_login}></a>
 <{/if}>

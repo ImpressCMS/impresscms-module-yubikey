@@ -36,7 +36,7 @@ class YubikeyToken extends icms_ipf_Object {
 	 * @param object $handler YubikeyPostHandler object
 	 */
 	public function __construct(& $handler) {
-		global $icmsConfig, $icmsUser, $yubikeyConfig;
+		global $icmsConfig, $yubikeyConfig;
 
 		parent::__construct($handler);
 
@@ -82,7 +82,7 @@ class YubikeyToken extends icms_ipf_Object {
 	// looks up the user name and returns a link
 	public function user_id()
 	{
-		return yubikey_getLinkedUnameFromId($this->getVar('user_id', 'e'));
+		return icms_member_user_Handler::getUserLink($this->getVar('user_id', 'e'));
 	}
 
 	// converts the yubikey_enabled field to human readable
