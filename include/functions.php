@@ -29,7 +29,7 @@ function yubikey_getModuleAdminLink() {
 /**
  * @todo to be move in icms core
  */
-function yubikey_getModuleName($withLink = true, $forBreadCrumb = false, $moduleName = false) {
+function yubikey_getModuleName($withLink = TRUE, $forBreadCrumb = FALSE, $moduleName = FALSE) {
 	if (!$moduleName) {
 		$moduleName = $icmsModule->getVar('dirname');
 	}
@@ -55,7 +55,7 @@ function yubikey_getModuleName($withLink = true, $forBreadCrumb = false, $module
  * @param string $default default page if previous page is not found
  * @return string previous page URL
  */
-function yubikey_getPreviousPage($default=false) {
+function yubikey_getPreviousPage($default=FALSE) {
 	global $impresscms;
 	if (isset($impresscms->urls['previouspage'])) {
 		return $impresscms->urls['previouspage'];

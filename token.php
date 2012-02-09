@@ -29,7 +29,7 @@ if (isset($_GET['op'])) $dirty_op = htmlentities(trim($_GET['op']));
 $valid_op = array('login', '');
 
 // Check that op is a permitted (whitelisted) value
-if (in_array($dirty_op, $valid_op, true))
+if (in_array($dirty_op, $valid_op, TRUE))
 {
 	// We accept that op is now clean and safe to use
 	$clean_op = $dirty_op;
@@ -40,7 +40,7 @@ if (in_array($dirty_op, $valid_op, true))
 
 			// initialise
 			$tokenObjects = array();
-			$otp_authenticated = $user_details = false;
+			$otp_authenticated = $user_details = FALSE;
 			$clean_otp = $dirty_otp = $public_id = $criteria = $tokenObj = $user_details = $user_name = '';
 
 			// sanitise and validate one time password (alphanumeric string 44 characters in length)
@@ -62,7 +62,7 @@ if (in_array($dirty_op, $valid_op, true))
 				
 				// check the key exists in the database and look up the associated user
 				$criteria = icms_buildCriteria(array('public_id' => $public_id,
-						'yubikey_enabled' => true));
+						'yubikey_enabled' => TRUE));
 				$tokenObjects = $yubikey_token_handler->getObjects($criteria);
 				if (!empty($tokenObjects))
 				{
@@ -87,7 +87,7 @@ if (in_array($dirty_op, $valid_op, true))
 							// The code checks if a user account requires Yubikey authentication and 
 							// redirects them to the Yubikey login page where appropriate.
 							
-							$yubikey_login_page = true;
+							$yubikey_login_page = TRUE;
 							
 							// One time password validated, now procede to validate ICMS password. 
 							// 
@@ -126,6 +126,6 @@ if (in_array($dirty_op, $valid_op, true))
 }
 
 $icmsTpl->assign('yubikey_show_breadcrumb', icms::$module->config['show_breadcrumb']);
-$icmsTpl->assign('yubikey_module_home', yubikey_getModuleName(true, true));
+$icmsTpl->assign('yubikey_module_home', yubikey_getModuleName(TRUE, TRUE));
 
 include_once 'footer.php';

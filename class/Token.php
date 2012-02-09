@@ -40,10 +40,10 @@ class YubikeyToken extends icms_ipf_Object {
 
 		parent::__construct($handler);
 
-		$this->quickInitVar('token_id', XOBJ_DTYPE_INT, true);
-		$this->quickInitVar('user_id', XOBJ_DTYPE_INT, true);
-   		$this->quickInitVar('public_id', XOBJ_DTYPE_TXTBOX, true);
-		$this->quickInitVar('yubikey_enabled', XOBJ_DTYPE_INT, true, false, false, 1);
+		$this->quickInitVar('token_id', XOBJ_DTYPE_INT, TRUE);
+		$this->quickInitVar('user_id', XOBJ_DTYPE_INT, TRUE);
+   		$this->quickInitVar('public_id', XOBJ_DTYPE_TXTBOX, TRUE);
+		$this->quickInitVar('yubikey_enabled', XOBJ_DTYPE_INT, TRUE, FALSE, FALSE, 1);
 
 		$this->setControl('user_id', 'user');
 		$this->setControl('yubikey_enabled', 'yesno');
@@ -94,7 +94,7 @@ class YubikeyToken extends icms_ipf_Object {
 		$button = '<a href="' . ICMS_URL . '/modules/' . basename(dirname(dirname(__FILE__)))
 				. '/admin/token.php?token_id=' . $this->getVar('token_id')
 				. '&amp;op=changeStatus">';
-		if ($status == false) {
+		if ($status == FALSE) {
 			$button .= '<img src="../images/button_cancel.png" alt="' . _CO_YUBIKEY_TOKEN_ENABLED
 				. '" title="' . _CO_YUBIKEY_TOKEN_DISABLE . '" /></a>';
 
@@ -136,11 +136,11 @@ class YubikeyToken extends icms_ipf_Object {
 		if ($int > 0 && $int < 86400)
 		{
 			$this->_timestampTolerance = $int;
-			return true;
+			return TRUE;
 		}
 		else
 		{
-			return false;
+			return FALSE;
 		}
 	}
 
@@ -154,11 +154,11 @@ class YubikeyToken extends icms_ipf_Object {
 		if ($int > 0 && $int < 600)
 		{
 			$this->_curlTimeout = $int;
-			return true;
+			return TRUE;
 		}
 		else
 		{
-			return false;
+			return FALSE;
 		}
 	}
 
@@ -178,19 +178,19 @@ class YubikeyToken extends icms_ipf_Object {
 		if (!$this->_id)
 		{
 			$this->_response = "ID NOT SET";
-			return false;
+			return FALSE;
 		}
 
 		if (!$this->otpIsProperLength($otp))
 		{
 			$this->_response = "BAD OTP LENGTH";
-			return false;
+			return FALSE;
 		}
 
 		if (!$this->otpIsModhex($otp))
 		{
 			$this->_response = "OTP NOT MODHEX";
-			return false;
+			return FALSE;
 		}
 
 		$urlParams = "id=".$this->_id."&otp=".$otp;
@@ -200,7 +200,7 @@ class YubikeyToken extends icms_ipf_Object {
 		if ($this->curlRequest($url)) //Returns 0 on success
 		{
 			$this->_response = "ERROR CONNECTING TO YUBICO - ".$this->_curlError;
-			return false;
+			return FALSE;
 		}
 
 		foreach ($this->_curlResult as $param)
@@ -216,24 +216,24 @@ class YubikeyToken extends icms_ipf_Object {
 		if (!$this->resultSignatureIsGood($signedMessage, $signature))
 		{
 			$this->_response = "BAD RESPONSE SIGNATURE";
-			return false;
+			return FALSE;
 		}
 
 		if (!$this->resultTimestampIsGood($timestamp))
 		{
 			$this->_response = "BAD TIMESTAMP";
-			return false;
+			return FALSE;
 		}
 
 		if ($status != "OK")
 		{
 			$this->_response = $status;
-			return false;
+			return FALSE;
 		}
 
 		// Everything went well - We pass
 		$this->_response = "OK";
-		return true;
+		return TRUE;
 	}
 
 	protected function createSignedRequest($urlParams)
@@ -241,7 +241,7 @@ class YubikeyToken extends icms_ipf_Object {
 		if ($this->_signatureKey)
 		{
 			$hash = urlencode (base64_encode (hash_hmac ("sha1", $urlParams, $this->_signatureKey,
-					true)));
+					TRUE)));
 			return "https://api.yubico.com/wsapi/verify?".$urlParams."&h=".$hash;
 		}
 		else
@@ -256,10 +256,10 @@ class YubikeyToken extends icms_ipf_Object {
 
 		curl_setopt ($ch, CURLOPT_TIMEOUT, $this->_curlTimeout);
 		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $this->_curlTimeout);
-		curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, false);
-		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, FALSE);
+		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 2);
-		curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, TRUE);
 
 		$this->_curlResult = explode ("\n", curl_exec($ch));
 
@@ -275,11 +275,11 @@ class YubikeyToken extends icms_ipf_Object {
 	{
 		if (strlen ($otp) == 44)
 		{
-			return true;
+			return TRUE;
 		}
 		else
 		{
-			return false;
+			return FALSE;
 		}
 	}
 
@@ -289,10 +289,10 @@ class YubikeyToken extends icms_ipf_Object {
 
 		foreach (str_split ($otp) as $char)
 		{
-			if (!in_array ($char, $modhexChars)) return false;
+			if (!in_array ($char, $modhexChars)) return FALSE;
 		}
 
-		return true;
+		return TRUE;
 	}
 
 	protected function resultTimestampIsGood($timestamp)
@@ -302,31 +302,31 @@ class YubikeyToken extends icms_ipf_Object {
 		$timestampSeconds = (date_format (date_create (substr ($timestamp, 0, -4)), "U"));
 
 		// If date() functions above fail for any reason, so do we
-		if (!$timestamp || !$now) return false;
+		if (!$timestamp || !$now) return FALSE;
 
 		if (($timestampSeconds + $this->_timestampTolerance) > $now &&
 		    ($timestampSeconds - $this->_timestampTolerance) < $now)
 		{
-			return true;
+			return TRUE;
 		}
 		else
 		{
-			return false;
+			return FALSE;
 		}
 	}
 
 	protected function resultSignatureIsGood($signedMessage, $signature)
 	{
-		if (!$this->_signatureKey) return true;
+		if (!$this->_signatureKey) return TRUE;
 
-		if (base64_encode (hash_hmac ("sha1", $signedMessage, $this->_signatureKey, true))
+		if (base64_encode (hash_hmac ("sha1", $signedMessage, $this->_signatureKey, TRUE))
 				== $signature)
 		{
-			return true;
+			return TRUE;
 		}
 		else
 		{
-			return false;
+			return FALSE;
 		}
 	}
 	///////////////////////////////////////////////////////////////////////

@@ -53,7 +53,7 @@ function yubikey_login_show($options) {
 			$block['sslloginlink'] = "<a href=\"javascript:openWithSelfMain('".$icmsConfig['sslloginlink']."', 'ssllogin', 300, 200);\">"._MB_SYSTEM_SECURE."</a>";
 		}
 
-		$config_handler = icms::handler('config');
+		$config_handler = icms::handler('icms_config');
 		$icmsConfigUser = $config_handler->getConfigsByCat(XOOPS_CONF_USER);
 
 		if ($icmsConfigUser['allow_register'] == 1) {
@@ -66,11 +66,11 @@ function yubikey_login_show($options) {
 
 		$xoopsAuthConfig = $config_handler->getConfigsByCat(XOOPS_CONF_AUTH);
 		if ($xoopsAuthConfig['auth_openid']) {
-			$block['auth_openid'] = true;
+			$block['auth_openid'] = TRUE;
 		}
 		return $block;
 	}
-	return false;
+	return FALSE;
 }
 
 /**
@@ -96,8 +96,8 @@ function yubikey_login_edit($options) {
 	$form = '<table><tr>';
 	$form .= '<tr><td>' . _MB_YUBIKEY_LOGIN_DISPLAY_MODE . '</td>';
 	
-	// Parameters XoopsFormSelect: ($caption, $name, $value = null, $size = 1, $multiple = false)
-	$form_select_display_mode = new XoopsFormSelect('', 'options[0]', $options[0], '1', false);
+	// Parameters icms_form_elements_Select: ($caption, $name, $value = null, $size = 1, $multiple = FALSE)
+	$form_select_display_mode = new icms_form_elements_Select('', 'options[0]', $options[0], '1', FALSE);
 	$form_select_display_mode->addOptionArray($display_mode_array);
 	
 	$form .= '<td>' . $form_select_display_mode->render() . '</td>';

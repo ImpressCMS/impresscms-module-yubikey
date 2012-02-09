@@ -55,7 +55,7 @@ if (isset($_POST['op'])) $clean_op = htmlentities($_POST['op']);
 if (isset($_GET['token_id'])) $clean_token_id = isset($_GET['token_id']) ? (int) $_GET['token_id'] : 0;
 if (isset($_POST['token_id'])) $clean_token_id = isset($_POST['token_id']) ? (int) $_POST['token_id'] : 0 ;
 
-if (in_array($clean_op,$valid_op,true)){
+if (in_array($clean_op,$valid_op,TRUE)){
   switch ($clean_op) {
   	case "mod":
   	case "changedField":
@@ -101,12 +101,12 @@ if (in_array($clean_op,$valid_op,true)){
 
   		$objectTable = new  icms_ipf_view_Table($yubikey_token_handler);
 		$objectTable->addQuickSearch('user_id', _AM_YUBIKEY_QUICK_SEARCH_UID);
-		$objectTable->addColumn(new icms_ipf_view_Column('user_id', _GLOBAL_LEFT, true, false,
-				false, _CO_YUBIKEY_TOKEN_USER_ID));
-		$objectTable->addColumn(new icms_ipf_view_Column('user_id', _GLOBAL_LEFT, true, 'uid',
-				false, _CO_YUBIKEY_TOKEN_UID));
-		$objectTable->addColumn(new icms_ipf_view_Column('public_id', _GLOBAL_LEFT, true));
-		$objectTable->addColumn(new icms_ipf_view_Column('yubikey_enabled', _GLOBAL_LEFT, true));
+		$objectTable->addColumn(new icms_ipf_view_Column('user_id', _GLOBAL_LEFT, TRUE, FALSE,
+				FALSE, _CO_YUBIKEY_TOKEN_USER_ID));
+		$objectTable->addColumn(new icms_ipf_view_Column('user_id', _GLOBAL_LEFT, TRUE, 'uid',
+				FALSE, _CO_YUBIKEY_TOKEN_UID));
+		$objectTable->addColumn(new icms_ipf_view_Column('public_id', _GLOBAL_LEFT, TRUE));
+		$objectTable->addColumn(new icms_ipf_view_Column('yubikey_enabled', _GLOBAL_LEFT, TRUE));
   		$objectTable->addIntroButton('addtoken', 'token.php?op=mod', _AM_YUBIKEY_TOKEN_CREATE);
   		$icmsAdminTpl->assign('yubikey_token_table', $objectTable->fetch());
   		$icmsAdminTpl->display('db:yubikey_admin_token.html');

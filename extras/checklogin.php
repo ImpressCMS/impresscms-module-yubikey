@@ -41,8 +41,8 @@ $pass4sql = addslashes( $myts->stripSlashesGPC($pass) ) ;
 	$criteria = new CriteriaCompo(new Criteria('email', $uname4sql ));
 	$criteria->add(new Criteria('pass', $pass4sql));
 	$user_handler =& xoops_gethandler('user');
-	$users =& $user_handler->getObjects($criteria, false);
-	if( empty( $users ) || count( $users ) != 1 ) $user = false ;
+	$users =& $user_handler->getObjects($criteria, FALSE);
+	if( empty( $users ) || count( $users ) != 1 ) $user = FALSE ;
 	else $user = $users[0] ;
 	unset( $users ) ;
 } */
@@ -63,7 +63,7 @@ global $icmsConfig;
 
 if (!$yubikey_login_page && !$icmsConfig['closesite']) { // flag that is set by the the Yubikey login page
 
-	$is_email_address = false;
+	$is_email_address = FALSE;
 	$yubikeyModule = $user_criteria = $user_list = $user_id = $yubikey_authentication_required = '';
 
 	// Check if the Yubikey module is installed
@@ -112,7 +112,7 @@ if (!$yubikey_login_page && !$icmsConfig['closesite']) { // flag that is set by 
 //////////////////// End Yubikey interrupt ///////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-if (false != $user) {
+if (FALSE != $user) {
 	if (0 == $user->getVar('level')) {
 		redirect_header(ICMS_URL.'/index.php', 5, _US_NOACTTPADM);
 		exit();
@@ -124,7 +124,7 @@ if (false != $user) {
 			$onlines =& $online_handler->getAll();
 			foreach( $onlines as $online ) {
 				if( $online['online_uid'] == $user->uid() ) {
-					$user = false;
+					$user = FALSE;
 					redirect_header(ICMS_URL.'/index.php',3,_US_MULTLOGIN);
 				}
 			}
@@ -135,10 +135,10 @@ if (false != $user) {
 		}
 	}
 	if ($icmsConfig['closesite'] == 1) {
-		$allowed = false;
+		$allowed = FALSE;
 		foreach ($user->getGroups() as $group) {
 			if (in_array($group, $icmsConfig['closesite_okgrp']) || ICMS_GROUP_ADMIN == $group) {
-				$allowed = true;
+				$allowed = TRUE;
 				break;
 			}
 		}
@@ -151,7 +151,7 @@ if (false != $user) {
 	if (!$member_handler->insertUser($user)) {
 	}
 	// Regenrate a new session id and destroy old session
-	session_regenerate_id(true);
+	session_regenerate_id(TRUE);
 	$_SESSION = array();
 	$_SESSION['xoopsUserId'] = $user->getVar('uid');
 	$_SESSION['xoopsUserGroups'] = $user->getGroups();
@@ -215,11 +215,11 @@ if (false != $user) {
 	$notification_handler =& xoops_gethandler('notification');
 	$notification_handler->doLoginMaintenance($user->getVar('uid'));
 
-	redirect_header($url, 1, sprintf(_US_LOGGINGU, $user->getVar('uname')), false);
+	redirect_header($url, 1, sprintf(_US_LOGGINGU, $user->getVar('uname')), FALSE);
 }elseif(empty($_POST['xoops_redirect'])){
 	redirect_header(ICMS_URL.'/user.php', 5, $xoopsAuth->getHtmlErrors());
 }else{
-	redirect_header(ICMS_URL.'/user.php?xoops_redirect='.urlencode(trim($_POST['xoops_redirect'])), 5, $xoopsAuth->getHtmlErrors(), false);
+	redirect_header(ICMS_URL.'/user.php?xoops_redirect='.urlencode(trim($_POST['xoops_redirect'])), 5, $xoopsAuth->getHtmlErrors(), FALSE);
 }
 exit();
 

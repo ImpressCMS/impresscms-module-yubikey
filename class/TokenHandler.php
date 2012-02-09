@@ -33,20 +33,20 @@ class YubikeyTokenHandler extends icms_ipf_Handler {
 		$visibility = $tokenObj = '';
 
 		$tokenObj = $this->get($token_id);
-		if ($tokenObj->getVar($field, 'e') == true) {
+		if ($tokenObj->getVar($field, 'e') == TRUE) {
 			$tokenObj->setVar($field, 0);
 			$visibility = 0;
 		} else {
 			$tokenObj->setVar($field, 1);
 			$visibility = 1;
 		}
-		$this->insert($tokenObj, true);
+		$this->insert($tokenObj, TRUE);
 
 		return $visibility;
 	}
 
 	/** 
-	 * Check validity of key and user before saving
+	 * Check validity of key and user details before saving
 	 * 
 	 * @param type $tokenObj
 	 * @return boolean 
@@ -54,7 +54,7 @@ class YubikeyTokenHandler extends icms_ipf_Handler {
 	protected function beforeSave(& $tokenObj)
 	{
 		$one_time_password = $yubikey_user = '';
-		$valid_key = false;
+		$valid_key = FALSE;
 		$yubikey_token_handler = icms_getModuleHandler('token', basename(dirname(dirname(__FILE__))), 
 				'yubikey');
 		
@@ -62,15 +62,25 @@ class YubikeyTokenHandler extends icms_ipf_Handler {
 		$one_time_password = $tokenObj->getVar('public_id');
 		$public_id_length = strlen($tokenObj->getVar('public_id'));
 		
-		// Check the length of the public_id field
+		// Check the length of the public_id field. Admins have a choice of entering either:
+		// 
+		// 1. The public ID of the key (the first 12 characters of the key output), or
+		// 
+		// 2. Discharging a Yubikey in the field (which will result in 44 characters of output, 
+		// ie. 12 character public ID + 32 character one-time password). If a 44 character input is 
+		// detected, the module will validate it against the Yubico validation servers as an 
+		// additional test.
+		// 
+		// Output must be alphanumeric only.
+		
 		switch ($public_id_length)
 		{
 			case "12": // Only the public ID of the key was submitted
-				$valid_key = ctype_alnum($one_time_password) ? true : false;
+				$valid_key = ctype_alnum($one_time_password) ? TRUE : FALSE;
 				break;
 			
 			case "44": // Public ID + one time password submitted, validate the key against Yubico
-				$valid_key = ctype_alnum($one_time_password) ? true : false;
+				$valid_key = ctype_alnum($one_time_password) ? TRUE : FALSE;
 				if ($valid_key)
 				{
 					$valid_key = $tokenObj->verify($one_time_password);
@@ -78,12 +88,12 @@ class YubikeyTokenHandler extends icms_ipf_Handler {
 				}
 				break;
 			
-			default: // If some other length was entered, it's wrong
-				$valid_key = false;
+			default: // If some other length was entered, reject input.
+				$valid_key = FALSE;
 				break;
 		}
 
-		// Check for duplicate Yubikeys - each may only be assigned to one account
+		// Check for duplicate Yubikeys. Each key may only be assigned to one account, duplicates are rejected.
 		if ($valid_key)
 		{
 			$criteria = icms_buildCriteria(array('public_id' => $tokenObj->getVar('public_id')));
@@ -91,20 +101,20 @@ class YubikeyTokenHandler extends icms_ipf_Handler {
 			$duplicate = array_shift($duplicate_keys);
 			if (!empty($duplicate))
 			{
-				if ($tokenObj->getVar('token_id') !== $duplicate->getVar('token_id'))
+				if ($tokenObj->getVar('token_id') != $duplicate->getVar('token_id'))
 				{
-					$tokenObj->setErrors(_CO_YUBIKEY_ERROR_DUPLICATE_KEYS_NOT_ALLOWED);
-					$valid_key = false;
+					$tokenObj->setErrors("Error: Duplicate keys are not allowed.");
+					$valid_key = FALSE;
 				}
 			}
 		}
 		
-		// Check that the designated user actually exists
+		// Check that the designated user actually exists. If the user isn't there, reject.
 		$member_handler = icms::handler("icms_member");
 		$yubikey_user = $member_handler->getUser($user_id);
 		if (empty($yubikey_user))
 		{
-			$valid_key = false;
+			$valid_key = FALSE;
 		}
 		
 		return $valid_key;
