@@ -29,21 +29,19 @@ function yubikey_getModuleAdminLink() {
 /**
  * @todo to be move in icms core
  */
-function yubikey_getModuleName($withLink = TRUE, $forBreadCrumb = FALSE, $moduleName = FALSE) {
-	if (!$moduleName) {
-		$moduleName = $icmsModule->getVar('dirname');
-	}
-	$icmsModule = icms_getModuleInfo($moduleName);
-	$icmsModuleConfig = icms_getModuleConfig($moduleName);
-	if (!icms_get_module_status($moduleName)) {
+function yubikey_getModuleName($withLink = TRUE, $forBreadCrumb = FALSE) 
+{
+	$yubikeyModule = icms_getModuleInfo('yubikey');
+	$yubikeyConfig = icms_getModuleConfig($yubikeyModule->getVar('dirname'));
+	if (!icms_get_module_status('yubikey')) {
 		return '';
 	}
 
 	if (!$withLink) {
-		return $icmsModule->getVar('name');
+		return $yubikeyModule->getVar('name');
 	} else {
-		$ret = ICMS_URL . '/modules/' . $moduleName . '/';
-		return '<a href="' . $ret . '">' . $icmsModule->getVar('name') . '</a>';
+		$ret = ICMS_URL . '/modules/' . $yubikeyModule->getVar('dirname') . '/';
+		return '<a href="' . $ret . '">' . $yubikeyModule->getVar('name') . '</a>';
 	}
 }
 

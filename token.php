@@ -19,7 +19,7 @@ include_once 'header.php';
 $xoopsOption['template_main'] = 'yubikey_token.html';
 include_once ICMS_ROOT_PATH . '/header.php';
 
-$clean_op = '';
+$clean_op = $dirty_op = '';
 $yubikey_token_handler = icms_getModuleHandler('token', basename(dirname(__FILE__)), 'yubikey');
 
 // Sanitise the op parameter
