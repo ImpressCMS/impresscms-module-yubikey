@@ -16,9 +16,11 @@ Yubikey is installed as a regular ImpressCMS module, which means you should copy
 
 Requirements
 ============
-1. You need a Yubikey hardware token, they cost $25. You can buy these from Yubico http://yubico.com/. Do not buy them from a reseller. Sometimes you can find promotional codes online.
-2. Your server must have cURL installed.
-3. You must get a Client ID and API key from the Yubikey website (see below). The module will not work until you do (see set up, below).
+1. This version of the Yubikey module is specific to ImpressCMS 1.3.x series (a version for the 1.2.x is also available). Do not install it on V2.0.
+2. You need a Yubikey hardware token, they cost $25. You can buy these from Yubico http://yubico.com/. Do not buy them from a reseller. Sometimes you can find promotional codes online.
+3. Your server must have cURL installed.
+4. You must get a Client ID and API key from the Yubikey website (see below). The module will not work until you do (see set up, below).
+5. A MANUAL is available in the /extras folder, or via a link in the control panel. DO NOT USE THIS MODULE UNTIL YOU HAVE READ IT.
 
 Set up
 ======
