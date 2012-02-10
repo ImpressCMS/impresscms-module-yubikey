@@ -95,13 +95,13 @@ class YubikeyToken extends icms_ipf_Object {
 				. '/admin/token.php?token_id=' . $this->getVar('token_id')
 				. '&amp;op=changeStatus">';
 		if ($status == FALSE) {
-			$button .= '<img src="../images/button_cancel.png" alt="' . _CO_YUBIKEY_TOKEN_ENABLED
-				. '" title="' . _CO_YUBIKEY_TOKEN_DISABLE . '" /></a>';
+			$button .= '<img src="' . ICMS_IMAGES_SET_URL . '/actions/button_cancel.png" alt="' 
+					. _CO_YUBIKEY_TOKEN_ENABLED	. '" title="' . _CO_YUBIKEY_TOKEN_DISABLE . '" /></a>';
 
 		} else {
 
-			$button .= '<img src="../images/button_ok.png" alt="' . _CO_YUBIKEY_TOKEN_DISABLED
-				. '" title="' . _CO_YUBIKEY_TOKEN_ENABLE . '" /></a>';
+			$button .= '<img src="' . ICMS_IMAGES_SET_URL . '/actions/button_ok.png" alt="' 
+					. _CO_YUBIKEY_TOKEN_DISABLED . '" title="' . _CO_YUBIKEY_TOKEN_ENABLE . '" /></a>';
 		}
 		return $button;
 	}
