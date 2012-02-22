@@ -33,8 +33,8 @@ $modversion = array(
 
 /**  Development information */
   'status_version'=> "1.1",
-  'status'=> "Beta",
-  'date'=> "9/2/2012",
+  'status'=> "Final",
+  'date'=> "22/2/2012",
   'author_word'=> "This module is not a substitute for sensible password management. However, it protects designated accounts in the events their password is compromised.",
 
 /** Contributors */
