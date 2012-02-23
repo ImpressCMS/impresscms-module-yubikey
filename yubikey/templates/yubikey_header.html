@@ -1,0 +1,14 @@
+<{if $yubikey_show_breadcrumb}>
+	<div class="yubikey_headertable">
+		<{if $yubikey_module_home}>
+			<span class="yubikey_modulename"><{$yubikey_module_home}></span>
+		<{/if}>
+		<{if $yubikey_category_path}>
+			<span class="yubikey_breadcrumb">
+			<{if $yubikey_module_home}>
+				&gt;
+			<{/if}>
+			<{$yubikey_category_path}></span>
+		<{/if}>
+	</div>
+<{/if}>
