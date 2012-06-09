@@ -12,5 +12,5 @@
 * @version		$Id$
 */
 
-header('location: token.php');
+include 'token.php';
 exit;
