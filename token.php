@@ -108,13 +108,9 @@ if (in_array($dirty_op, $valid_op))
 						}
 					}
 				}				
-			} elseif ($_POST['pass'] && !$clean_otp) {
-				// If there's no OTP try the standard login (login may have been posted from the 
-				// Yubikey login block)
-				include ICMS_ROOT_PATH . '/include/checklogin.php';
 			}
 			
-			// Otherwise / if any check fails, redirect back to login page
+			// If any check fails, redirect back to Yubikey login page to try again
 			redirect_header(ICMS_URL . '/modules/' . basename(dirname(__FILE__))
 						. '/token.php', 2, _CO_YUBIKEY_LOGIN_FAILED);
 
