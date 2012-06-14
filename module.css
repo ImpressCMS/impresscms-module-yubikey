@@ -18,12 +18,6 @@
 	cursor: text;
 }
 
-.post-date{float:left; margin:0 12px 10px 0;}
-.post-date .month{background:#000000 url(images/post-month.gif) no-repeat scroll 0 0; color: #FFF; display:block; font-size:80%;height:25px;line-height:25px;margin:0;text-align:center;width:48px;}
-.post-date .day{background:#42A4DC url(images/post-day.gif) no-repeat scroll 0 0; color: #000; display:block; font-size:140%;height:30px;line-height:25px;margin:1px 0 0;text-align:center;width:48px;}
-.post-title{margin:0;padding:2px 0 5px 0;}
-
-
 .yubikey_headertable {padding: 0; margin: 0; border-bottom: 1px solid; margin-bottom: 10px;}
 .yubikey_modulename {font-size: 0.8em; text-align: left; font-weight: bold; padding-right: 0.3em;	line-height: 18px;}
 .yubikey_breadcrumb {font-size: 0.8em; line-height: 18px;}

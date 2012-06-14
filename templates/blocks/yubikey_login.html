@@ -13,7 +13,7 @@
     <div><input type="password" name="pass" size="12" maxlength="32" /><br /></div>
 	<{if $block.yubikey_login_display_mode == 2 || $block.yubikey_login_display_mode == 3}>
 		<p><{$block.yubikey}></p>
-		<div id="yubikey-authentication"><input type="text" class="yubikey-otp" name="yubikey_otp" size="9" maxlength="44" /><br /></div>
+		<div class="yubikey-authentication"><input type="text" class="yubikey-otp" name="yubikey_otp" size="9" maxlength="44" /><br /></div>
 	<{/if}>
     <{if $block.rememberme }>
     <div><input type="checkbox" name="rememberme" value="On" /><{$block.lang_rememberme}><br /></div>
