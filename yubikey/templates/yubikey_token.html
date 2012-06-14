@@ -1,0 +1,19 @@
+<{includeq file='db:yubikey_header.html'}>
+
+<div class="yubikey-authentication">
+	<form method="post" action="token.php">
+		<h3><{$smarty.const._CO_YUBIKEY_TWO_FACTOR_AUTHENTICATION_REQUIRED}></h3>
+		<p><{$smarty.const._CO_YUBIKEY_PASSWORD}></p>
+		<div><input type="password" name="pass" size="32" maxlength="32" /><br /><br /></div>
+		<p><{$smarty.const._CO_YUBIKEY_TRIGGER_YOUR_YUBIKEY}></p>
+		<div>
+			<input type="text" class="yubikey-otp" name="yubikey_otp" size="32" maxlength="64" /><br /><br />
+		</div>
+		<div>
+			<input type="hidden" name="op" value="login" />
+			<input type="submit" />
+		</div>
+	</form>
+</div>
+
+<{includeq file='db:yubikey_footer.html'}>
