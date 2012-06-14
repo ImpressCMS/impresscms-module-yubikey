@@ -21,3 +21,4 @@ define("_MB_YUBIKEY_LOGIN_OPTION_0", "Username, password (no Yubikey login)");
 define("_MB_YUBIKEY_LOGIN_OPTION_1", "Username, password, link to Yubikey login page");
 define("_MB_YUBIKEY_LOGIN_OPTION_2", "Username, password, Yubikey");
 define("_MB_YUBIKEY_LOGIN_OPTION_3", "Password, Yubikey (Yubikey required)");
+define("_MB_YUBIKEY_LPASS", "Lost Password?");
