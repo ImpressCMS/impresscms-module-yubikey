@@ -1,0 +1,51 @@
+<div id="block_login_form">
+	<{if $block.yubikey_login_display_mode == 0 || $block.yubikey_login_display_mode == 1}>
+		<form style="margin-top: 0px;" action="<{$icms_url}>/user.php" method="post">
+	<{elseif $block.yubikey_login_display_mode == 2 || $block.yubikey_login_display_mode == 3}>
+		<form style="margin-top: 0px;" action="<{$icms_url}>/modules/yubikey/token.php?op=login" method="post">
+	<{/if}>
+	
+	<{if $block.yubikey_login_display_mode == 0 || $block.yubikey_login_display_mode == 1 || $block.yubikey_login_display_mode == 2}>
+		<p><{$block.lang_username}></p>
+		<div><input type="text" class="uname" name="uname" size="12" value="<{$block.unamevalue}>" maxlength="25" /><br /></div>
+	<{/if}>
+	<p><{$block.lang_password}></p>
+    <div><input type="password" name="pass" size="12" maxlength="32" /><br /></div>
+	<{if $block.yubikey_login_display_mode == 2 || $block.yubikey_login_display_mode == 3}>
+		<p><{$block.yubikey}></p>
+		<div class="yubikey-authentication"><input type="text" class="yubikey-otp" name="yubikey_otp" size="9" maxlength="44" /><br /></div>
+	<{/if}>
+    <{if $block.rememberme }>
+    <div><input type="checkbox" name="rememberme" value="On" /><{$block.lang_rememberme}><br /></div>
+    <{/if}>
+    <div><input type="hidden" name="xoops_redirect" value="<{$xoops_requesturi}>" /></div>
+    <div><input type="hidden" name="op" value="login" /></div>
+    <div><input type="submit" value="<{$block.lang_login}>" /><br /></div>
+    <{$block.sslloginlink}>
+  </form>
+  <{if $block.auth_openid}>
+	  <div style="text-align: <{$smarty.const._GLOBAL_LEFT}>;"><a href="#" onclick="xoopsGetElementById('openid-verify-form2').style.display = 'block'; xoopsGetElementById('block_login_form').style.display = 'none'; return FALSE;"><{$smarty.const._MB_SYSTEM_OPENID_LOGIN}></a></div>
+  <{/if}>
+</div>
+
+<{if $block.auth_openid}>
+	<div id="openid-verify-form2" style="display: none;">
+	  <form method="get" action="<{$icms_url}>/try_auth.php">
+	    <{$smarty.const._MB_SYSTEM_OPENID_URL}>
+	    <input type="hidden" name="action" value="verify" />
+	    <input type="text" class="openid_url" name="openid_identifier" size="12" value="" />
+	    <input type="submit" value="<{$block.lang_login}>" />
+	  </form>
+	  <div style="text-align: <{$smarty.const._GLOBAL_LEFT}>;"><a href="#" onclick="xoopsGetElementById('block_login_form').style.display = 'block'; xoopsGetElementById('openid-verify-form2').style.display = 'none'; return FALSE;"><{$smarty.const._MB_SYSTEM_OPENID_NORMAL_LOGIN}></a></div>
+	</div>
+<{/if}>
+<br />
+<a href="<{$icms_url}>/user.php#lost" title="<{$block.lang_lostpass}>"><{$block.lang_lostpass}></a>
+<{if $block.registration }>
+<br />
+<a href="<{$icms_url}>/register.php" title="<{$block.lang_registernow}>"><{$block.lang_registernow}></a>
+<br />
+<{/if}>
+<{if $block.yubikey_login_display_mode == 1}>
+	<br /><a href="<{$icms_url}>/modules/yubikey/token.php" title="2-factor authentication"><{$block.yubikey_login}></a>
+<{/if}>
