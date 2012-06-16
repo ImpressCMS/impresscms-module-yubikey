@@ -14,5 +14,5 @@
 
 include_once "../../mainfile.php";  
 include_once ICMS_ROOT_PATH . "/header.php"; 
-include 'token.php';
+header('location: token.php');
 exit;
